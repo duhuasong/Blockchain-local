@@ -100,7 +100,7 @@ func add_metric (stub shim.ChaincodeStubInterface, args []string) ([]byte,error)
 		Id: id,
 		Timestamp: timestamp,
 		Device_Person: args[1],
-		Event_type: args[2]
+		Event_type: args[2],
 	}
 
 	met = append(met,metric)
