@@ -162,6 +162,7 @@ curl -s -X POST \
 echo
 echo
 
+sleep 5
 echo "POST instantiate Spica chaincode on peer1 of Org1"
 echo
 curl -s -X POST \
