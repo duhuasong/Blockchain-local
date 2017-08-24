@@ -81,8 +81,8 @@ curl -s -X POST \
   -H "content-type: application/json" \
   -d '{
 	"peers": ["localhost:7051","localhost:7056"],
-	"chaincodeName":"mycc",
-	"chaincodePath":"github.com/example_cc",
+	"chaincodeName":"IoT",
+	"chaincodePath":"github.com/Blockchain-IoT_1",
 	"chaincodeVersion":"v0"
 }'
 echo
@@ -97,8 +97,8 @@ curl -s -X POST \
   -H "content-type: application/json" \
   -d '{
 	"peers": ["localhost:8051","localhost:8056"],
-	"chaincodeName":"mycc",
-	"chaincodePath":"github.com/example_cc",
+	"chaincodeName":"IoT",
+	"chaincodePath":"github.com/Blockchain-IoT_1",
 	"chaincodeVersion":"v0"
 }'
 echo
@@ -111,69 +111,22 @@ curl -s -X POST \
   -H "authorization: Bearer $ORG1_TOKEN" \
   -H "content-type: application/json" \
   -d '{
-	"chaincodeName":"mycc",
+	"chaincodeName":"IoT",
 	"chaincodeVersion":"v0",
 	"functionName":"init",
-	"args":["a","100","b","200"]
+	"args":["a"]
 }'
-echo
-echo
-
-echo "POST invoke chaincode on peers of Org1 and Org2"
-echo
-TRX_ID=$(curl -s -X POST \
-  http://localhost:4000/channels/mychannel/chaincodes/mycc \
-  -H "authorization: Bearer $ORG1_TOKEN" \
-  -H "content-type: application/json" \
-  -d '{
-	"peers": ["localhost:7051", "localhost:8051"],
-	"fcn":"move",
-	"args":["a","b","10"]
-}')
-echo "Transacton ID is $TRX_ID"
 echo
 echo
 
 echo "GET query chaincode on peer1 of Org1"
 echo
 curl -s -X GET \
-  "http://localhost:4000/channels/mychannel/chaincodes/mycc?peer=peer1&fcn=query&args=%5B%22a%22%5D" \
+  "http://localhost:4000/channels/mychannel/chaincodes/IoT?peer=peer1&fcn=picture_count&args=%5B%22a%22%5D" \
   -H "authorization: Bearer $ORG1_TOKEN" \
   -H "content-type: application/json"
 echo
 echo
-
-echo "GET query Block by blockNumber"
-echo
-curl -s -X GET \
-  "http://localhost:4000/channels/mychannel/blocks/1?peer=peer1" \
-  -H "authorization: Bearer $ORG1_TOKEN" \
-  -H "content-type: application/json"
-echo
-echo
-
-echo "GET query Transaction by TransactionID"
-echo
-curl -s -X GET http://localhost:4000/channels/mychannel/transactions/$TRX_ID?peer=peer1 \
-  -H "authorization: Bearer $ORG1_TOKEN" \
-  -H "content-type: application/json"
-echo
-echo
-
-############################################################################
-### TODO: What to pass to fetch the Block information
-############################################################################
-#echo "GET query Block by Hash"
-#echo
-#hash=????
-#curl -s -X GET \
-#  "http://localhost:4000/channels/mychannel/blocks?hash=$hash&peer=peer1" \
-#  -H "authorization: Bearer $ORG1_TOKEN" \
-#  -H "cache-control: no-cache" \
-#  -H "content-type: application/json" \
-#  -H "x-access-token: $ORG1_TOKEN"
-#echo
-#echo
 
 echo "GET query ChainInfo"
 echo

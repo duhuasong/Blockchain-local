@@ -66,6 +66,9 @@ echo "============== Node successfully ran =============="
 
 echo "============== Running secure gateway =============="
 docker run -t ibmcom/secure-gateway-client cY2HLfs4GT9_prod_ng
-echo "============== Gateway is enabled. If this is a new pc, add ACL rule ==============
+echo "============== Gateway is enabled. If this is a new pc, add ACL rule =============="
 
-./runApp.sh
+echo "============== Deploying chaincode =============="
+./deploy.sh
+echo "============== Deployed finished =============="
+
