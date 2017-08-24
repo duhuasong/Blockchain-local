@@ -27,6 +27,7 @@ ORG1_TOKEN=$(echo $ORG1_TOKEN | jq ".token" | sed "s/\"//g")
 echo
 echo "ORG1 token is $ORG1_TOKEN"
 echo
+
 echo "POST request Enroll on Org2 ..."
 echo
 ORG2_TOKEN=$(curl -s -X POST \
@@ -39,6 +40,7 @@ echo
 echo "ORG2 token is $ORG2_TOKEN"
 echo
 echo
+
 echo "POST request Create channel  ..."
 echo
 curl -s -X POST \
@@ -51,6 +53,7 @@ curl -s -X POST \
 }'
 echo
 echo
+
 sleep 5
 echo "POST request Join channel on Org1"
 echo
@@ -64,6 +67,7 @@ curl -s -X POST \
 echo
 echo
 
+sleep 1
 echo "POST request Join channel on Org2"
 echo
 curl -s -X POST \
@@ -76,6 +80,7 @@ curl -s -X POST \
 echo
 echo
 
+sleep 1
 echo "POST Install IoT chaincode on Org1"
 echo
 curl -s -X POST \
@@ -92,6 +97,7 @@ echo
 echo
 
 
+sleep 1
 echo "POST Install IoT chaincode on Org2"
 echo
 curl -s -X POST \
@@ -107,6 +113,7 @@ curl -s -X POST \
 echo
 echo
 
+sleep 3
 echo "POST instantiate IoT chaincode on peer1 of Org1"
 echo
 curl -s -X POST \
@@ -122,6 +129,7 @@ curl -s -X POST \
 echo
 echo
 
+sleep 1
 echo "GET query chaincode on peer1 of Org1"
 echo
 curl -s -X GET \
@@ -131,6 +139,7 @@ curl -s -X GET \
 echo
 echo
 
+sleep 1
 echo "POST Install Spica chaincode on Org1"
 echo
 curl -s -X POST \
@@ -146,7 +155,7 @@ curl -s -X POST \
 echo
 echo
 
-
+sleep 1
 echo "POST Install Spica chaincode on Org2"
 echo
 curl -s -X POST \
@@ -162,7 +171,7 @@ curl -s -X POST \
 echo
 echo
 
-sleep 5
+sleep 3
 echo "POST instantiate Spica chaincode on peer1 of Org1"
 echo
 curl -s -X POST \
