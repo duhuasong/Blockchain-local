@@ -4,6 +4,9 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
+echo "============== Waiting =============="
+sleep 5
+
 
 jq --version > /dev/null 2>&1
 if [ $? -ne 0 ]; then

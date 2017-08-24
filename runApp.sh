@@ -70,5 +70,5 @@ echo "============== Gateway is enabled. If this is a new pc, add ACL rule =====
 
 echo "============== Deploying chaincode =============="
 ./deploy.sh
-echo "============== Deployed finished =============="
+echo "============== Deploy finished =============="
 
