@@ -1,7 +1,7 @@
 {
    "host":"localhost",
    "port":"4000",
-   "jwt_expiretime": "36000",
+   "jwt_expiretime": "129600",
    "channelName":"mychannel",
    "GOPATH":"../artifacts",
    "keyValueStore":"/tmp/fabric-client-kvs",
