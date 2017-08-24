@@ -76,7 +76,7 @@ curl -s -X POST \
 echo
 echo
 
-echo "POST Install chaincode on Org1"
+echo "POST Install IoT chaincode on Org1"
 echo
 curl -s -X POST \
   http://localhost:4000/chaincodes \
@@ -92,7 +92,7 @@ echo
 echo
 
 
-echo "POST Install chaincode on Org2"
+echo "POST Install IoT chaincode on Org2"
 echo
 curl -s -X POST \
   http://localhost:4000/chaincodes \
@@ -107,7 +107,7 @@ curl -s -X POST \
 echo
 echo
 
-echo "POST instantiate chaincode on peer1 of Org1"
+echo "POST instantiate IoT chaincode on peer1 of Org1"
 echo
 curl -s -X POST \
   http://localhost:4000/channels/mychannel/chaincodes \
@@ -128,6 +128,52 @@ curl -s -X GET \
   "http://localhost:4000/channels/mychannel/chaincodes/IoT?peer=peer1&fcn=picture_count&args=%5B%22a%22%5D" \
   -H "authorization: Bearer $ORG1_TOKEN" \
   -H "content-type: application/json"
+echo
+echo
+
+echo "POST Install Spica chaincode on Org1"
+echo
+curl -s -X POST \
+  http://localhost:4000/chaincodes \
+  -H "authorization: Bearer $ORG1_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{
+	"peers": ["localhost:7051","localhost:7056"],
+	"chaincodeName":"Spica",
+	"chaincodePath":"github.com/Blockchain-Spica",
+	"chaincodeVersion":"v0"
+}'
+echo
+echo
+
+
+echo "POST Install Spica chaincode on Org2"
+echo
+curl -s -X POST \
+  http://localhost:4000/chaincodes \
+  -H "authorization: Bearer $ORG2_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{
+	"peers": ["localhost:8051","localhost:8056"],
+	"chaincodeName":"Spica",
+	"chaincodePath":"github.com/Blockchain-Spica",
+	"chaincodeVersion":"v0"
+}'
+echo
+echo
+
+echo "POST instantiate Spica chaincode on peer1 of Org1"
+echo
+curl -s -X POST \
+  http://localhost:4000/channels/mychannel/chaincodes \
+  -H "authorization: Bearer $ORG1_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{
+	"chaincodeName":"Spica",
+	"chaincodeVersion":"v0",
+	"functionName":"init",
+	"args":["a"]
+}'
 echo
 echo
 
