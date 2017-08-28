@@ -187,6 +187,55 @@ curl -s -X POST \
 echo
 echo
 
+sleep 1
+echo "POST Install Datacenter chaincode on Org1"
+echo
+curl -s -X POST \
+  http://localhost:4000/chaincodes \
+  -H "authorization: Bearer $ORG1_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{
+	"peers": ["localhost:7051","localhost:7056"],
+	"chaincodeName":"Datacenter",
+	"chaincodePath":"github.com/Blockchain-DC",
+	"chaincodeVersion":"v0"
+}'
+echo
+echo
+
+
+sleep 1
+echo "POST Install Datacenter chaincode on Org2"
+echo
+curl -s -X POST \
+  http://localhost:4000/chaincodes \
+  -H "authorization: Bearer $ORG2_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{
+	"peers": ["localhost:8051","localhost:8056"],
+	"chaincodeName":"Datacenter",
+	"chaincodePath":"github.com/Blockchain-DC",
+	"chaincodeVersion":"v0"
+}'
+echo
+echo
+
+sleep 3
+echo "POST instantiate Datacenter chaincode on peer1 of Org1"
+echo
+curl -s -X POST \
+  http://localhost:4000/channels/mychannel/chaincodes \
+  -H "authorization: Bearer $ORG1_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{
+	"chaincodeName":"Datacenter",
+	"chaincodeVersion":"v0",
+	"functionName":"init",
+	"args":["a"]
+}'
+echo
+echo
+
 echo "GET query ChainInfo"
 echo
 curl -s -X GET \
