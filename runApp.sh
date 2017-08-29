@@ -59,6 +59,7 @@ function installNodeModules() {
 
 restartNetwork
 
+killall node
 installNodeModules
 echo "============== Running nodejs server =============="
 PORT=4000 nohup node app.js &

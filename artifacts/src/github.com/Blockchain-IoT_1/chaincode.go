@@ -13,6 +13,7 @@ type myChaincode struct {}
 type Metric struct {
 	Id int
 	Image string
+	Type int
 	Timestamp int
 }
 
@@ -68,7 +69,7 @@ func (t *myChaincode) Invoke (stub shim.ChaincodeStubInterface) peer.Response {
 }
 
 func add_picture (stub shim.ChaincodeStubInterface, args []string) ([]byte,error) {
-	if len(args) != 2 {
+	if len(args) != 3 {
 		return nil, fmt.Errorf("Missing required parameters")
 	}
 
@@ -97,10 +98,16 @@ func add_picture (stub shim.ChaincodeStubInterface, args []string) ([]byte,error
 	if err5 != nil {
 		return nil, fmt.Errorf("Provided timestamp is invalid")
 	}
+
+	typea, err10 := strconv.Atoi(args[2])
+	if err10 != nil {
+		return nil, fmt.Errorf("Provided type is not int")
+	}
 	
 	metric := Metric {
 		Id: id,
 		Image: args[0],
+		Type: typea,
 		Timestamp: timestamp,
 	}
 
